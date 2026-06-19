@@ -16,6 +16,24 @@ export default function AdminPage() {
   const [mensaje, setMensaje] = useState('')
   const [tipoMensaje, setTipoMensaje] = useState<'ok' | 'error'>('ok')
   const [guardando, setGuardando] = useState(false)
+  const [reseteando, setReseteando] = useState(false)
+
+  const resetearTodo = async () => {
+    const confirmacion = prompt('Escribe RESET para confirmar que quieres borrar todos los datos del evento:')
+    if (confirmacion !== 'RESET') return
+    setReseteando(true)
+    const { error } = await supabase.from('participantes').delete().neq('cedula', '')
+    if (error) {
+      alert('Error al resetear: ' + error.message)
+    } else {
+      setMensaje('✅ Todos los datos han sido eliminados. El evento está en ceros.')
+      setTipoMensaje('ok')
+      setParticipante(null)
+      setCedula('')
+      setEstadoBusqueda('idle')
+    }
+    setReseteando(false)
+  }
 
   const buscar = async () => {
     if (!cedula) return
@@ -168,6 +186,19 @@ return (
 
           </div>
         )}
+
+        {/* Resetear evento */}
+        <div className="bg-white rounded-2xl shadow p-5 border-2 border-red-100">
+          <p className="text-sm font-bold text-red-600 mb-1">⚠️ Zona de peligro</p>
+          <p className="text-xs text-gray-500 mb-3">Borra todos los participantes y puntos. Úsalo solo antes de iniciar el evento real.</p>
+          <button
+            onClick={resetearTodo}
+            disabled={reseteando}
+            className="w-full bg-red-500 text-white font-bold py-3 rounded-xl disabled:opacity-40 hover:bg-red-600 transition-colors"
+          >
+            {reseteando ? 'Reseteando...' : '🗑️ Resetear todo el evento'}
+          </button>
+        </div>
 
         {/* Feedback */}
         {mensaje && (
