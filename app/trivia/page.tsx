@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
-import { CheckCircle, Loader2, Trophy } from 'lucide-react'
+import { Loader2, Trophy } from 'lucide-react'
 
 const PREGUNTAS = [
   {
