@@ -91,10 +91,12 @@ export default function PromotorPage() {
         return
       }
 
+      const actualData = actual as unknown as { puntos_total: number }
+
       const { error } = await supabase
         .from('participantes')
         .update({
-          puntos_total: actual.puntos_total + puntosNum,
+          puntos_total: actualData.puntos_total + puntosNum,
           [columnaEstacion]: puntosNum,
           updated_at: new Date().toISOString(),
         })
