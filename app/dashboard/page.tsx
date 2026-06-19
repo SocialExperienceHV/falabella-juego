@@ -68,14 +68,14 @@ export default function DashboardPage() {
     <main className="min-h-screen bg-[#0a0f1e] text-white pb-16">
 
       {/* Header */}
-      <div className="bg-[#0d1526] border-b border-white/10 px-6 py-4 flex items-center justify-between sticky top-0 z-10 backdrop-blur">
+      <div className="bg-[#007733] px-6 py-4 flex items-center justify-between sticky top-0 z-10">
         <div className="flex items-center gap-4">
-          <Image src="/logo-banco.png" alt="Banco Falabella" width={110} height={40} className="object-contain brightness-0 invert" />
-          <div className="h-6 w-px bg-white/20" />
-          <Image src="/logo-copa.png" alt="Copa Bienestar" width={70} height={35} className="object-contain" />
+          <Image src="/logo-banco.png" alt="Banco Falabella" width={120} height={45} className="object-contain" />
+          <div className="h-6 w-px bg-white/30" />
+          <Image src="/logo-copa.png" alt="Copa Bienestar" width={75} height={38} className="object-contain" />
         </div>
-        <div className="flex items-center gap-2 text-xs text-white/40">
-          <RefreshCw size={12} className={pulsing ? 'animate-spin text-[#00ff88]' : ''} />
+        <div className="flex items-center gap-2 text-xs text-white/70">
+          <RefreshCw size={12} className={pulsing ? 'animate-spin text-white' : ''} />
           {ultimaActualizacion}
         </div>
       </div>
