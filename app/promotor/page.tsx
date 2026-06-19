@@ -86,7 +86,7 @@ export default function PromotorPage() {
         [columnaEstacion]: puntosNum,
       })
       if (error) {
-        setMensaje('Error al registrar. Intenta de nuevo.')
+        setMensaje(`Error: ${error.message} (${error.code})`)
         setEstado('error')
         return
       }
