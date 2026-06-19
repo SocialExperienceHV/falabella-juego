@@ -18,6 +18,7 @@ export default function PromotorPage() {
   const [puntos, setPuntos] = useState('')
   const [estacion, setEstacion] = useState<number>(1)
   const [estado, setEstado] = useState<Estado>('idle')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [esNuevo, setEsNuevo] = useState(false)
   const [mensaje, setMensaje] = useState('')
 
@@ -57,17 +58,28 @@ export default function PromotorPage() {
       return
     }
 
-    if (estado === 'duplicado') {
-      setMensaje(`Esta persona ya participó en la Estación ${estacion}.`)
-      setEstado('error')
-      return
-    }
-
     setEstado('loading')
 
     const columnaEstacion = `estacion_${estacion}` as 'estacion_1' | 'estacion_2' | 'estacion_3' | 'estacion_4'
 
-    if (esNuevo) {
+    // Siempre consultar el estado actual desde Supabase
+    const { data: actual } = await supabase
+      .from('participantes')
+      .select('puntos_total, estacion_1, estacion_2, estacion_3, estacion_4')
+      .eq('cedula', cedula)
+      .single()
+
+    const actualData = actual as unknown as { puntos_total: number; estacion_1: number; estacion_2: number; estacion_3: number; estacion_4: number } | null
+
+    // Verificar duplicado al enviar
+    if (actualData && (actualData[columnaEstacion] as number) > 0) {
+      setMensaje(`Esta persona ya participó en la Estación ${estacion}.`)
+      setEstado('duplicado')
+      return
+    }
+
+    if (!actualData) {
+      // Usuario nuevo
       const { error } = await supabase.from('participantes').insert({
         cedula,
         puntos_total: puntosNum,
@@ -79,20 +91,7 @@ export default function PromotorPage() {
         return
       }
     } else {
-      const { data: actual, error: fetchError } = await supabase
-        .from('participantes')
-        .select('puntos_total, ' + columnaEstacion)
-        .eq('cedula', cedula)
-        .single()
-
-      if (fetchError || !actual) {
-        setMensaje('Error al obtener datos. Intenta de nuevo.')
-        setEstado('error')
-        return
-      }
-
-      const actualData = actual as unknown as { puntos_total: number }
-
+      // Usuario existente
       const { error } = await supabase
         .from('participantes')
         .update({
