@@ -12,5 +12,6 @@ export type Participante = {
   estacion_2: number
   estacion_3: number
   estacion_4: number
+  created_at: string
   updated_at: string
 }
