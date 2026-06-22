@@ -86,8 +86,9 @@ export default function RankingPage() {
                   <span className="text-4xl">{MEDALLAS[i]}</span>
                   <div>
                     <p className="font-black text-2xl tracking-wide">
-                      {p.cedula}
+                      {p.nombre || p.cedula}
                     </p>
+                    <p className="text-xs opacity-60 font-medium">{p.cedula}</p>
                     <div className="flex gap-2 mt-0.5 opacity-75 text-xs">
                       {[1, 2, 3, 4].map((est) => {
                         const pts = p[`estacion_${est}` as keyof Participante] as number
@@ -122,9 +123,10 @@ export default function RankingPage() {
               >
                 <div className="flex items-center gap-3">
                   <span className="text-white/60 font-bold w-6 text-center">{i + 6}</span>
-                  <span className="text-white font-semibold">
-                    {p.cedula}
-                  </span>
+                  <div>
+                    <p className="text-white font-semibold">{p.nombre || p.cedula}</p>
+                    <p className="text-white/50 text-xs">{p.cedula}</p>
+                  </div>
                 </div>
                 <span className="text-white font-black text-xl">{p.puntos_total} pts</span>
               </div>

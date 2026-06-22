@@ -15,6 +15,7 @@ const ESTACIONES = [
 
 export default function PromotorPage() {
   const [cedula, setCedula] = useState('')
+  const [nombre, setNombre] = useState('')
   const [puntos, setPuntos] = useState('')
   const [estacion, setEstacion] = useState<number>(1)
   const [estado, setEstado] = useState<Estado>('idle')
@@ -82,6 +83,7 @@ export default function PromotorPage() {
       // Usuario nuevo
       const { error } = await supabase.from('participantes').insert({
         cedula,
+        nombre: nombre.trim() || cedula,
         puntos_total: puntosNum,
         [columnaEstacion]: puntosNum,
       })
@@ -108,9 +110,10 @@ export default function PromotorPage() {
       }
     }
 
-    setMensaje(`✅ ${puntosNum} puntos asignados a cédula ${cedula}`)
+    setMensaje(`✅ ${puntosNum} puntos asignados a ${nombre.trim() || cedula}`)
     setEstado('exito')
     setCedula('')
+    setNombre('')
     setPuntos('')
     setEsNuevo(false)
     setTimeout(() => setEstado('idle'), 3000)
@@ -118,6 +121,7 @@ export default function PromotorPage() {
 
   const resetear = () => {
     setCedula('')
+    setNombre('')
     setPuntos('')
     setEstado('idle')
     setEsNuevo(false)
@@ -182,9 +186,18 @@ export default function PromotorPage() {
 
           {/* Badge: nuevo o existente */}
           {estado === 'nuevo' && (
-            <div className="mt-2 flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-700 rounded-xl px-3 py-2 text-sm font-semibold">
-              <UserPlus size={18} />
-              ¡Usuario NUEVO! Primera vez en el evento.
+            <div className="mt-2 flex flex-col gap-2">
+              <div className="flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-700 rounded-xl px-3 py-2 text-sm font-semibold">
+                <UserPlus size={18} />
+                ¡Usuario NUEVO! Ingresa su nombre completo.
+              </div>
+              <input
+                type="text"
+                placeholder="Nombre completo del participante"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                className="w-full border-2 border-blue-200 rounded-xl px-4 py-3 text-base focus:outline-none focus:border-[#007733] text-gray-900"
+              />
             </div>
           )}
           {estado === 'existente' && (

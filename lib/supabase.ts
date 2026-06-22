@@ -7,6 +7,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export type Participante = {
   cedula: string
+  nombre: string
   puntos_total: number
   estacion_1: number
   estacion_2: number
