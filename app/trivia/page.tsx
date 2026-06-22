@@ -7,45 +7,84 @@ import { Loader2, Trophy } from 'lucide-react'
 
 const PREGUNTAS = [
   {
-    pregunta: '¿Qué área del Banco se encarga de comunicar y posicionar nuestras marcas y productos?',
-    opciones: ['Marketing', 'Medios de Pago', 'CMR Puntos', 'Operaciones'],
-    correcta: 0,
-  },
-  {
-    pregunta: '¿Cuál de los siguientes beneficios obtienes al usar tu Tarjeta CMR Banco Falabella?',
+    pregunta: '¿Cuáles son los focos de 2026 que tenemos como negocio?',
     opciones: [
-      'Acumular CMR Puntos por tus compras',
-      'Acceso a préstamos hipotecarios',
-      'Descuentos en todas las compras en efectivo',
-      'Exclusivamente seguros de vida',
+      'Crecer en clientes activos, Crecer en Saldos Vista, Mantener el riesgo controlado y Posicionar Marca y CMR Puntos',
+      'Crecer en clientes de Cuenta de Ahorros, Crecer en clientes activos, Disminuir el riesgo y Posicionar CMR Puntos',
+      'Crecer en clientes nomina, Crecer en clientes activos, Disminuir el riesgo y Posicionar CMR Puntos',
+      'Crecer en clientes activos, Crecer en Saldos Vista, Mantener el riesgo controlado y Posicionar Marca',
     ],
     correcta: 0,
   },
   {
-    pregunta: '¿Qué funcionalidad te permite realizar pagos y transferencias desde la App Banco Falabella?',
-    opciones: ['CMR Puntos', 'Medios de Pago', 'Crédito Personal', 'Seguros Falabella'],
+    pregunta: '¿Qué porcentaje de nuestros clientes del banco aún no sabe que puede usar su Tarjeta CMR o Débito Banco Falabella en cualquier comercio?',
+    opciones: ['60%', '80%', '50%', '35%'],
+    correcta: 3,
+  },
+  {
+    pregunta: '¿Qué porcentaje de nuestros "No clientes" aún no sabe que tenemos una Cuenta de Ahorros?',
+    opciones: ['70%', '60%', '50%', '30%'],
+    correcta: 0,
+  },
+  {
+    pregunta: '¿Cuál es la meta de aspiración de saldos en CDT y CDAT para 2026?',
+    opciones: ['1.7 billones', '2.3 billones', '2.5 billones', '1.1 billones'],
+    correcta: 2,
+  },
+  {
+    pregunta: '¿Cuál es la meta de aspiración de saldos vista (plata de clientes en cuentas de ahorro y alcancía digital) para 2026?',
+    opciones: ['1 millón', '2 billones', '1 billón', '2 millones'],
+    correcta: 2,
+  },
+  {
+    pregunta: '¿Qué porcentaje de clientes CMR deberían tener una Cuenta de Ahorro a cierre del 2026?',
+    opciones: ['20%', '5%', '10%', '8%'],
+    correcta: 0,
+  },
+  {
+    pregunta: '¿Cuál es la tasa máxima de rentabilidad que paga nuestra Alcancía?',
+    opciones: ['9,35 EA', '9,25 EA', '8,25 EA', '8,35 EA'],
     correcta: 1,
   },
   {
-    pregunta: '¿Qué beneficio ofrece CMR Puntos al acumular puntos en tus compras?',
+    pregunta: 'Hoy, 55 de cada 100 clientes usan su tarjeta de crédito CMR el mismo día de la apertura. ¿A qué porcentaje queremos llegar?',
+    opciones: ['58%', '60%', '65%', '75%'],
+    correcta: 1,
+  },
+  {
+    pregunta: '¿Cuál de estos beneficios se entrega al momento de que un cliente apertura su tarjeta de crédito?',
     opciones: [
-      'Canjear productos, viajes, experiencias y más',
-      'Acceder a descuentos exclusivos en comercios aliados',
-      'Obtener avances en efectivo sin costo',
-      'Pagar la cuota de tu Tarjeta CMR en cualquier cajero',
+      'Bono de bienvenida de 60mil CMR puntos',
+      '3 meses gratis de cuota de manejo',
+      '5 ingresos gratis a salas VIP',
+      '1% de cashback en todas las compras con su CMR',
     ],
+    correcta: 1,
+  },
+  {
+    pregunta: '¿Cuál es la categoría donde más nos ayudaría crecer para aumentar el share de compras y lograr el objetivo de crecer un 20% la facturación?',
+    opciones: ['Viajes y Supermercados', 'Licores', 'Viajes y Belleza', 'Transporte'],
     correcta: 0,
   },
   {
-    pregunta: '¿Cuál de las siguientes opciones te permite canjear tus CMR Puntos?',
+    pregunta: 'Al cierre de diciembre del 2026, ¿cuántos clientes activos deberíamos tener?',
     opciones: [
-      'Viajes, experiencias y panoramas',
-      'Productos en Falabella y sus marcas asociadas',
-      'Pago de la tarjeta CMR',
-      'Donaciones a fundaciones',
-      'Todas las anteriores',
+      '1.32 millones de clientes',
+      '1.95 millones de clientes',
+      '1.84 millones de clientes',
+      '2 millones de clientes',
     ],
-    correcta: 4,
+    correcta: 2,
+  },
+  {
+    pregunta: '¿Cuál es nuestra ambición de crecimiento en compras para alcanzar la meta de participación de mercado?',
+    opciones: [
+      'Generar $249 mil millones extra en compras para llegar al 15% de market share',
+      'Generar $349 mil millones extra en compras para llegar al 18% de market share',
+      'Generar $500 mil millones extra en compras para llegar al 20% de market share',
+      'Generar $100 mil millones extra en compras para llegar al 12% de market share',
+    ],
+    correcta: 0,
   },
 ]
 
@@ -177,7 +216,7 @@ export default function TriviaPage() {
         {/* Título */}
         <div className="text-center">
           <h1 className="text-3xl font-black text-white tracking-tight">TRIVIA</h1>
-          <p className="text-green-300 text-sm mt-1">Estación 4 · 2 puntos por respuesta correcta</p>
+          <p className="text-green-300 text-sm mt-1">Estación 4 · {PUNTOS_POR_PREGUNTA} puntos por respuesta correcta</p>
         </div>
 
         {/* FASE: Ingresar cédula */}
