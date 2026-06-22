@@ -89,7 +89,7 @@ const PREGUNTAS = [
 ]
 
 const LETRAS = ['A', 'B', 'C', 'D', 'E']
-const PUNTOS_POR_PREGUNTA = 12
+const PUNTOS_POR_PREGUNTA = 4
 
 type Fase = 'cedula' | 'jugando' | 'guardando' | 'finalizado' | 'error' | 'ya_jugo'
 
