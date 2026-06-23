@@ -10,7 +10,6 @@ type Estado = 'idle' | 'loading' | 'nuevo' | 'existente' | 'duplicado' | 'exito'
 const ESTACIONES = [
   { id: 1, nombre: 'Estación 1' },
   { id: 2, nombre: 'Estación 2' },
-  { id: 3, nombre: 'Estación 3' },
 ]
 
 export default function PromotorPage() {
@@ -141,7 +140,7 @@ export default function PromotorPage() {
       {/* Selector de estación */}
       <div className="w-full max-w-md mb-4">
         <label className="block text-sm font-semibold text-gray-700 mb-2">Tu estación</label>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-2">
           {ESTACIONES.map((e) => (
             <button
               key={e.id}
