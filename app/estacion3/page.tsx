@@ -79,6 +79,18 @@ export default function Estacion3Page() {
       setCedulaError('Ingresa una cédula válida (6 a 12 dígitos)')
       return
     }
+
+    // Segunda llamada: ya verificado, es nuevo, esperamos que llene nombre
+    if (esNuevo) {
+      setPreguntas(elegirAleatorias())
+      setIndice(0)
+      setPuntos(0)
+      setResultado(null)
+      setFase('jugando')
+      iniciarTemporizador()
+      return
+    }
+
     setLoadingCedula(true)
     setCedulaError('')
 
@@ -95,7 +107,13 @@ export default function Estacion3Page() {
       return
     }
 
-    setEsNuevo(!data)
+    if (!data) {
+      // Nuevo: mostrar campo nombre antes de arrancar
+      setEsNuevo(true)
+      return
+    }
+
+    // Existente sin haber jugado esta estación
     setPreguntas(elegirAleatorias())
     setIndice(0)
     setPuntos(0)

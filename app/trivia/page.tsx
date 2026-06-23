@@ -114,6 +114,13 @@ export default function TriviaPage() {
       setCedulaError('Ingresa una cédula válida (6 a 12 dígitos)')
       return
     }
+
+    // Segunda llamada: ya verificado, es nuevo, esperamos que llene nombre
+    if (esNuevo) {
+      setFase('jugando')
+      return
+    }
+
     setLoadingCedula(true)
     setCedulaError('')
 
@@ -130,7 +137,13 @@ export default function TriviaPage() {
       return
     }
 
-    setEsNuevo(!data)
+    if (!data) {
+      // Nuevo: mostrar campo nombre antes de arrancar
+      setEsNuevo(true)
+      return
+    }
+
+    // Existente sin haber jugado esta estación
     setFase('jugando')
   }
 
