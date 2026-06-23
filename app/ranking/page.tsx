@@ -73,9 +73,15 @@ export default function RankingPage() {
         <p className="text-green-300 text-sm mt-1">Actualizado: {horaFormato}</p>
       </div>
 
+      {/* Layout: ranking + premios */}
+      <div className="w-full max-w-5xl px-4 flex flex-col lg:flex-row gap-6 items-start">
+
+      {/* Columna ranking */}
+      <div className="flex-1 flex flex-col gap-6">
+
       {/* Top 5 destacados */}
       {participantes.length > 0 && (
-        <div className="w-full max-w-3xl mb-6">
+        <div className="w-full mb-0">
           <div className="grid grid-cols-1 gap-3">
             {participantes.slice(0, 5).map((p, i) => (
               <div
@@ -113,7 +119,7 @@ export default function RankingPage() {
 
       {/* Resto del ranking (posiciones 6+) */}
       {participantes.length > 5 && (
-        <div className="w-full max-w-3xl">
+        <div className="w-full">
           <h2 className="text-white font-bold text-lg mb-3 text-center opacity-80">Otros participantes</h2>
           <div className="bg-white/20 backdrop-blur rounded-2xl overflow-hidden">
             {participantes.slice(5).map((p, i) => (
@@ -136,12 +142,49 @@ export default function RankingPage() {
       )}
 
       {participantes.length === 0 && (
-        <div className="text-center text-green-200 mt-20">
+        <div className="text-center text-green-200 mt-10">
           <Star size={60} className="mx-auto mb-4 opacity-50" />
           <p className="text-2xl font-bold">¡El juego está por comenzar!</p>
           <p className="text-lg opacity-70 mt-2">Los participantes aparecerán aquí en tiempo real</p>
         </div>
       )}
+
+      </div>{/* fin columna ranking */}
+
+      {/* Columna premios */}
+      <div className="w-full lg:w-72 shrink-0">
+        <div className="bg-white/15 backdrop-blur rounded-2xl overflow-hidden">
+          <div className="bg-yellow-400 px-4 py-3 text-center">
+            <p className="font-black text-yellow-900 text-lg tracking-tight">🏆 Premios</p>
+          </div>
+          <div className="flex flex-col">
+            {[
+              { puesto: '1.º', premio: 'Entrada doble a concierto', puntos: '15.000 CMR Puntos', concierto: true },
+              { puesto: '2.º', premio: 'Entrada doble a concierto', puntos: '12.000 CMR Puntos', concierto: true },
+              { puesto: '3.º', premio: 'Entrada doble a concierto', puntos: '10.000 CMR Puntos', concierto: true },
+              { puesto: '4.º', premio: 'Entrada doble a concierto', puntos: '8.000 CMR Puntos',  concierto: true },
+              { puesto: '5.º', premio: null,                        puntos: '7.000 CMR Puntos',  concierto: false },
+              { puesto: '6.º', premio: null,                        puntos: '6.000 CMR Puntos',  concierto: false },
+              { puesto: '7.º', premio: null,                        puntos: '5.000 CMR Puntos',  concierto: false },
+              { puesto: '8.º', premio: null,                        puntos: '4.000 CMR Puntos',  concierto: false },
+              { puesto: '9.º', premio: null,                        puntos: '3.500 CMR Puntos',  concierto: false },
+              { puesto: '10.º', premio: null,                       puntos: '2.500 CMR Puntos',  concierto: false },
+            ].map((item, i) => (
+              <div key={i} className={`flex items-center gap-3 px-4 py-3 border-b border-white/10 last:border-0 ${i < 4 ? 'bg-yellow-400/10' : ''}`}>
+                <span className="text-white font-black text-sm w-8 shrink-0">{item.puesto}</span>
+                <div className="flex flex-col min-w-0">
+                  {item.concierto && (
+                    <span className="text-yellow-300 text-xs font-semibold leading-tight">🎵 Entrada doble concierto</span>
+                  )}
+                  <span className="text-white font-bold text-xs leading-tight">⭐ {item.puntos}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      </div>{/* fin layout flex */}
 
       <div className="mt-10 flex flex-col items-center gap-2">
         <p className="text-white/50 text-xs font-medium tracking-wide">Plataforma Desarrollada por:</p>
