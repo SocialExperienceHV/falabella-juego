@@ -72,12 +72,12 @@ export default function RankingPage() {
   return (
     <main className="min-h-screen bg-[#007733] flex flex-col items-center pb-12">
       {/* Header */}
-      <div className="w-full px-8 py-5 flex items-center justify-between mb-6">
+      <div className="w-full px-8 py-3 flex items-center justify-between mb-2">
         <Image src="/logo-banco.png" alt="Banco Falabella" width={140} height={55} className="object-contain" />
         <Image src="/logo-copa.png" alt="Copa Bienestar" width={120} height={55} className="object-contain" />
       </div>
 
-      <div className="text-center mb-6 px-6">
+      <div className="text-center mb-4 px-6">
         <div className="flex items-center justify-center gap-3 mb-1">
           <Trophy className="text-yellow-300" size={36} />
           <h1 className="text-4xl font-black text-white tracking-tight">Ranking en Vivo</h1>
