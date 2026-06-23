@@ -226,8 +226,11 @@ export default function Estacion3Page() {
               {/* Temporizador */}
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Tiempo</span>
-                <div className={`text-5xl font-black tabular-nums transition-colors ${enRojo ? 'text-red-500 animate-pulse' : 'text-[#007733]'}`}>
-                  {String(tiempo).padStart(2, '0')}s
+                <div className="flex flex-col items-end">
+                  <div className={`text-5xl font-black tabular-nums transition-colors ${enRojo ? 'text-red-500 animate-pulse' : 'text-[#007733]'}`}>
+                    {String(tiempo).padStart(2, '0')}s
+                  </div>
+                  <span className="text-xs text-gray-300 font-medium">fila #{preguntaActual.id}</span>
                 </div>
               </div>
 
