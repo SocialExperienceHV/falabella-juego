@@ -237,23 +237,15 @@ export default function Estacion3Page() {
               {resultado === null && !tiempoAgotado && (
                 <>
                   {/* Emoji */}
-                  <div className="flex items-center justify-center gap-1 py-2 flex-wrap">
-                    {preguntaActual.emoji.split('').reduce((acc: string[], char) => {
-                      // Agrupar caracteres de emoji (algunos son multi-codepoint)
-                      const prev = acc[acc.length - 1]
-                      if (prev && /️|⃣/.test(char)) {
-                        acc[acc.length - 1] = prev + char
-                      } else {
-                        acc.push(char)
-                      }
-                      return acc
-                    }, []).filter(s => s.trim()).map((parte, i) =>
-                      parte === '⭐' ? (
-                        <Image key={i} src="/cmr.png" alt="CMR" width={52} height={52} className="object-contain" />
-                      ) : (
-                        <span key={i} className="text-5xl">{parte}</span>
-                      )
-                    )}
+                  <div className="flex items-center justify-center gap-2 py-2 flex-wrap">
+                    {preguntaActual.emoji.split('⭐').map((parte, i, arr) => (
+                      <span key={i} className="flex items-center gap-2">
+                        {parte && <span className="text-5xl">{parte}</span>}
+                        {i < arr.length - 1 && (
+                          <Image src="/cmr.png" alt="CMR" width={52} height={52} className="object-contain" />
+                        )}
+                      </span>
+                    ))}
                   </div>
 
                   {/* Pista y palabras */}
