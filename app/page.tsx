@@ -21,6 +21,12 @@ export default function Home() {
           🎯 App Promotor
         </Link>
         <Link
+          href="/estacion3"
+          className="bg-white text-[#007733] font-bold text-xl py-5 px-8 rounded-2xl text-center shadow-lg active:scale-95 transition-transform"
+        >
+          🎯 Jugadas en Clave — Est. 3
+        </Link>
+        <Link
           href="/trivia"
           className="bg-white text-[#007733] font-bold text-xl py-5 px-8 rounded-2xl text-center shadow-lg active:scale-95 transition-transform"
         >
