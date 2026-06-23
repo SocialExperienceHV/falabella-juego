@@ -104,6 +104,16 @@ export default function RankingPage() {
                   <div>
                     <p className="font-black text-xl tracking-wide leading-tight">{p.nombre || p.cedula}</p>
                     <p className="text-xs opacity-50 font-medium">{p.cedula}</p>
+                    <div className="flex gap-2 mt-1 flex-wrap">
+                      {[1,2,3,4].map((est) => {
+                        const pts = p[`estacion_${est}` as keyof Participante] as number
+                        return pts > 0 ? (
+                          <span key={est} className="text-xs font-semibold bg-black/15 rounded-full px-2 py-0.5 opacity-80">
+                            E{est}: {pts}pts
+                          </span>
+                        ) : null
+                      })}
+                    </div>
                   </div>
                 </div>
                 <div className="text-right">
