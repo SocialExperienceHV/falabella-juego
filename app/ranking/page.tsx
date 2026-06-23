@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { supabase, Participante } from '@/lib/supabase'
+import { Trophy, Star } from 'lucide-react'
 
 const MEDALLAS = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣']
 
@@ -65,9 +66,9 @@ export default function RankingPage() {
 
       <div className="text-center mb-6 px-6">
         <div className="flex items-center justify-center gap-3 mb-1">
-          <Image src="/cmr.png" alt="CMR" width={40} height={40} className="object-contain" />
+          <Trophy className="text-yellow-300" size={36} />
           <h1 className="text-4xl font-black text-white tracking-tight">Ranking en Vivo</h1>
-          <Image src="/cmr.png" alt="CMR" width={40} height={40} className="object-contain" />
+          <Trophy className="text-yellow-300" size={36} />
         </div>
         <p className="text-green-300 text-sm mt-1">Actualizado: {horaFormato}</p>
       </div>
@@ -136,7 +137,7 @@ export default function RankingPage() {
 
       {participantes.length === 0 && (
         <div className="text-center text-green-200 mt-20">
-          <Image src="/cmr.png" alt="CMR" width={80} height={80} className="object-contain mx-auto mb-4 opacity-60" />
+          <Star size={60} className="mx-auto mb-4 opacity-50" />
           <p className="text-2xl font-bold">¡El juego está por comenzar!</p>
           <p className="text-lg opacity-70 mt-2">Los participantes aparecerán aquí en tiempo real</p>
         </div>
