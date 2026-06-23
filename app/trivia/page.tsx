@@ -96,6 +96,8 @@ type Fase = 'cedula' | 'jugando' | 'guardando' | 'finalizado' | 'error' | 'ya_ju
 export default function TriviaPage() {
   const [fase, setFase] = useState<Fase>('cedula')
   const [cedula, setCedula] = useState('')
+  const [nombre, setNombre] = useState('')
+  const [esNuevo, setEsNuevo] = useState(false)
   const [cedulaError, setCedulaError] = useState('')
   const [loadingCedula, setLoadingCedula] = useState(false)
   const [preguntaActual, setPreguntaActual] = useState(0)
@@ -117,7 +119,7 @@ export default function TriviaPage() {
 
     const { data } = await supabase
       .from('participantes')
-      .select('estacion_4')
+      .select('estacion_4, nombre')
       .eq('cedula', cedula)
       .single()
 
@@ -128,6 +130,7 @@ export default function TriviaPage() {
       return
     }
 
+    setEsNuevo(!data)
     setFase('jugando')
   }
 
@@ -177,6 +180,7 @@ export default function TriviaPage() {
     } else {
       const res = await supabase.from('participantes').insert({
         cedula,
+        nombre: nombre.trim() || cedula,
         puntos_total: pts,
         estacion_4: pts,
       })
@@ -194,6 +198,8 @@ export default function TriviaPage() {
   const resetear = () => {
     setFase('cedula')
     setCedula('')
+    setNombre('')
+    setEsNuevo(false)
     setCedulaError('')
     setPreguntaActual(0)
     setRespuestas(Array(PREGUNTAS.length).fill(null))
@@ -233,6 +239,15 @@ export default function TriviaPage() {
               className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:border-[#007733] text-gray-900"
             />
             {cedulaError && <p className="text-red-500 text-sm font-semibold">{cedulaError}</p>}
+            {esNuevo && (
+              <input
+                type="text"
+                placeholder="Nombre completo del participante"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                className="w-full border-2 border-blue-200 rounded-xl px-4 py-3 text-base focus:outline-none focus:border-[#007733] text-gray-900"
+              />
+            )}
             <button
               onClick={handleIniciar}
               disabled={loadingCedula || !cedula}
