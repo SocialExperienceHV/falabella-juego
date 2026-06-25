@@ -37,6 +37,7 @@ export default function RankingPage() {
       .from('participantes')
       .select('*')
       .order('puntos_total', { ascending: false })
+      .order('tiempo_trivia', { ascending: true, nullsFirst: false })
       .limit(10)
 
     if (data) {

@@ -106,6 +106,7 @@ export default function TriviaPage() {
   const [respondida, setRespondida] = useState(false)
   const [puntosGanados, setPuntosGanados] = useState(0)
   const [mensajeError, setMensajeError] = useState('')
+  const [inicioTrivia, setInicioTrivia] = useState<number>(0)
 
   const validarCedula = (v: string) => /^\d{6,12}$/.test(v)
 
@@ -117,6 +118,7 @@ export default function TriviaPage() {
 
     // Segunda llamada: ya verificado, es nuevo, esperamos que llene nombre
     if (esNuevo) {
+      setInicioTrivia(Date.now())
       setFase('jugando')
       return
     }
@@ -144,6 +146,7 @@ export default function TriviaPage() {
     }
 
     // Existente sin haber jugado esta estación
+    setInicioTrivia(Date.now())
     setFase('jugando')
   }
 
@@ -172,6 +175,7 @@ export default function TriviaPage() {
 
   const guardarPuntos = async (pts: number) => {
     setFase('guardando')
+    const segundos = Math.round((Date.now() - inicioTrivia) / 1000)
 
     const { data: actual } = await supabase
       .from('participantes')
@@ -186,6 +190,7 @@ export default function TriviaPage() {
         .update({
           puntos_total: actual.puntos_total + pts,
           estacion_4: pts,
+          tiempo_trivia: segundos,
           updated_at: new Date().toISOString(),
         })
         .eq('cedula', cedula)
@@ -196,6 +201,7 @@ export default function TriviaPage() {
         nombre: nombre.trim() || cedula,
         puntos_total: pts,
         estacion_4: pts,
+        tiempo_trivia: segundos,
       })
       error = res.error
     }

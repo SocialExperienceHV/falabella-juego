@@ -13,6 +13,7 @@ export type Participante = {
   estacion_2: number
   estacion_3: number
   estacion_4: number
+  tiempo_trivia: number | null
   created_at: string
   updated_at: string
 }
